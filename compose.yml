@@ -1,0 +1,29 @@
+services:
+  jenkins-controller:
+    image: jenkins/jenkins:lts
+    container_name: jenkins-controller
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./keys/jenkins-ssh-idrsa:/var/jenkins_home/.ssh/id_rsa:ro
+      - ./keys/jenkins-ssh-idrsa.pub:/var/jenkins_home/.ssh/id_rsa.pub:ro
+    networks:
+      - jenkins
+
+  jenkins-agent:
+    build: .
+    container_name: jenkins-agent
+    networks:
+      - jenkins
+    expose:
+      - "22"
+    volumes:
+      - ./keys/jenkins-ssh-idrsa.pub:/home/jenkins/.ssh/authorized_keys:ro
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins:
