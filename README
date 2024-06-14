@@ -1,0 +1,38 @@
+# Jenkins Distributed Layout
+
+This repo contains the basic data to create a distributed Jenkins layout:
+
+* Jenkins controller: contains the actual Jenkins control
+* Jenkins agents: one or more runner that execute the actual work, for example, compiling.
+
+## Installation
+
+The first step needed, before deploying the docker compose containers, is to generate the ssh keys on the local computer (where the docker engine is running). For that, a bash script is provided:
+
+```bash
+cd scripts
+./generate-keys.sh <your mail>
+```
+
+After that, you should be able to create the containers:
+
+```bash
+docker compose up -d
+```
+Once you have the containers running, follow the Jenkins guidelines to configure a new node using ssh connection. Use the keys generated previosly on keys/ dir when required.
+
+
+## Usage
+
+This repository provides the basic layout for the creation of a Distributed Jenkins Layout. You should create multiple agents according your needs. Following the [Jenkins best practices](https://www.jenkins.io/doc/book/using/best-practices/), each agent should be dedicated to a single task.
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

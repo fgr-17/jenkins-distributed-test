@@ -12,15 +12,27 @@ services:
     networks:
       - jenkins
 
+  jenkins-agent-base:
+    build: 
+      context: ./agent-base
+    # volumes:
+    #   - ./keys/jenkins-ssh-idrsa.pub:/home/jenkins/.ssh/authorized_keys:ro
+    image: jenkins-agent-base
+    command: /bin/true
+
   jenkins-agent:
-    build: .
+    build: 
+      context: ./agent-1
     container_name: jenkins-agent
     networks:
       - jenkins
     expose:
       - "22"
     volumes:
-      - ./keys/jenkins-ssh-idrsa.pub:/home/jenkins/.ssh/authorized_keys:ro
+      - ./agent-1-vol:/workspace
+    command: ["/usr/sbin/sshd", "-D"]
+
+  
 
 volumes:
   jenkins_home:
