@@ -19,22 +19,12 @@ After that, you should be able to create the containers:
 ```bash
 docker compose up -d
 ```
->>>>>
+Once you have the containers running, follow the Jenkins guidelines to configure a new node using ssh connection. Use the keys generated previosly on keys/ dir when required.
+
 
 ## Usage
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
+This repository provides the basic layout for the creation of a Distributed Jenkins Layout. You should create multiple agents according your needs. Following the [Jenkins best practices](https://www.jenkins.io/doc/book/using/best-practices/), each agent should be dedicated to a single task.
 
 ## Contributing
 
